@@ -5,6 +5,7 @@ try:
     import psycopg2
     from sqlalchemy import create_engine
     from datetime import datetime
+    import os
 
 
     test_table_name = 'test_table_name'
@@ -15,7 +16,7 @@ try:
     ]
 
 
-    filename = 'test_table.json'
+    filename = 'test_table_name.json'
 
 
     with open(filename, 'w') as f:
@@ -71,15 +72,26 @@ finally:
     drop_table_query_new_rows = f"DROP TABLE IF EXISTS {table_name_with_timestamp} CASCADE;"
     drop_table_query_main = f"DROP TABLE IF EXISTS {test_table_name} CASCADE;"
 
-
-    cursor.execute(drop_table_query_new_rows)
+    try:
+        cursor.execute(drop_table_query_new_rows)
+        
+        conn.commit()
+        print(f"{table_name_with_timestamp} deleted successfully.")
+    except Exception as e:
+        print(f"Cleanup not complete reported from {drop_table_query_new_rows}: {e}")
+    try:    
+        cursor.execute(drop_table_query_main)
+        
+        conn.commit()
+        print(f"{test_table_name} and constraints deleted successfully.")
+    except Exception as e:
+        print(f"Cleanup not complete reported from {drop_table_query_main}: {e}")
     
-    conn.commit()
-
-    cursor.execute(drop_table_query_main)
-    
-    conn.commit()
     cursor.close()
     conn.close()
-    print(f"{test_table_name} and constraints deleted successfully.")
-    print(f"{table_name_with_timestamp} and constraints deleted successfully.")
+
+    try:    
+        os.remove(f"{test_table_name}.json")
+    except Exception as e:
+        print(f"Cleanup not complete {e}")
+    

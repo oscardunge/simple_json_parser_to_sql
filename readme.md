@@ -5,12 +5,14 @@
 ## Overview
 
 This project provides a simple Python script (`json_parser_simple.py`) that parses JSON data and inserts it into a PostgreSQL database. It is designed to be straightforward and easy to use, making it ideal for small projects or learning purposes.
+It solves wanting a sql database from a no-sql fileformat, for acid transactions, easy transformability and reproducable analytics, ML and visualizations. 
 
 ## Features
 
 - Parses JSON data from a file.
 - Inserts parsed data into a PostgreSQL database.
 - Supports basic error handling.
+- Has a unit-test in test_folder/unittest.py
 
 ## Requirements
 
@@ -42,39 +44,10 @@ This project provides a simple Python script (`json_parser_simple.py`) that pars
 
 ## Example
 
-```python
-import json
-import pandas as pd
-from datetime import datetime
-import psycopg2
-from sqlalchemy import create_engine
-import re
-import sys
-from typing import List, Dict, Union, Any
-
-def parse_json_to_sql(json_file):
-    with open(json_file, 'r') as file:
-        data = json.load(file)
-    
-    # Database connection
-    engine = create_engine('postgresql://username:password@localhost:5432/mydatabase')
-    conn = engine.connect()
-    
-    # Create table if not exists
-    conn.execute('''CREATE TABLE IF NOT EXISTS data (
-                        id SERIAL PRIMARY KEY,
-                        name TEXT,
-                        age INTEGER
-                    )''')
-    
-    # Insert data
-    for item in data:
-        conn.execute('INSERT INTO data (name, age) VALUES (%s, %s)', (item['name'], item['age']))
-    
-    conn.close()
-
-if __name__ == "__main__":
-    parse_json_to_sql(sys.argv[1])
+```
+    #this input method used in terminal 
+    #example python json_parser_simple.py bronze_filename_2024 natural_key
+    #will use main(sys.argv[1], sys.argv[2]) 
 ```
 
 ## Input
@@ -89,7 +62,8 @@ if __name__ == "__main__":
 
 ## Output
 
-- Data inserted into a PostgreSQL database table named `data`.
+- In mentioned example Data inserted into a PostgreSQL database table in schema sql_dwh if it exists. 
+Otherwise run "CREATE SCHEMA sql_dwh;"  named `data`.
 
 ## Tests
 
