@@ -21,6 +21,9 @@ It solves wanting a sql database from a no-sql fileformat, for acid transactions
     ```bash
     pip install pandas psycopg2 sqlalchemy
     ```
+- from config.connection_details import conn_details
+    holds some simple localhost info, but its nice to 
+    have separate, to mask from git. 
 
 ## Installation
 
