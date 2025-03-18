@@ -148,7 +148,7 @@ def create_table_with_constraints_return_new_tablename(table_name: str, id: str,
         return table_name_with_timestamp
 
     except Exception as e:
-        print(f"Error___: {e} error reported from constraint try in in function create_table_with_constraints_return_new_tablename")
+        print(f"Log: {e} from constraint try block in function create_table_with_constraints_return_new_tablename")
         return table_name_with_timestamp
     finally:
         local_cursor.close()
