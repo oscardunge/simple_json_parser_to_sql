@@ -45,6 +45,8 @@ def json_file_name_to_dataframe(table_name: str) -> pd.DataFrame:
 
     return df
 
+
+
 def pandas_dataframe_to_sql_return_tablename(table_name: str) -> str:
     """
     Converts a pandas DataFrame to a SQL table and returns the table name with a timestamp.
@@ -65,6 +67,7 @@ def pandas_dataframe_to_sql_return_tablename(table_name: str) -> str:
 
     return table_name_with_timestamp
 
+
 def get_column_names(table_name: str,  cursor: psycopg2.extensions.cursor) -> list:
     """
     Retrieves the column names of a table.
@@ -80,6 +83,7 @@ def get_column_names(table_name: str,  cursor: psycopg2.extensions.cursor) -> li
     columns = [f'"{row[0]}"' for row in cursor.fetchall()]
 
     return columns
+
 
 def create_table_with_constraints_return_new_tablename(table_name: str, id: str, conn_details: dict) -> str:
     """
@@ -131,6 +135,7 @@ def create_table_with_constraints_return_new_tablename(table_name: str, id: str,
         return table_name_with_timestamp
     finally:
         local_cursor.close()
+        
 
 def main(table_name: str, id: str):
     """
