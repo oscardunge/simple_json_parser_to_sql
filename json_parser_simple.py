@@ -23,21 +23,6 @@ from config.connection_details import conn_details
 
 
 
-class CustomExceptionWithVariable(Exception):
-    """
-    Custom exception class that includes a variable attribute.
-
-    Attributes:
-        message (str): The error message.
-        variable (Any): The variable associated with the error.
-    """
-    def __init__(self, message: str, variable: Any):
-        super().__init__(message)
-        self.variable = variable
-
-    def __str__(self) -> str:
-        return f"{super().__str__()} (Variable: {self.variable})"
-
 def json_file_name_to_dataframe(table_name: str) -> pd.DataFrame:
     """
     Reads a JSON file and converts it to a pandas DataFrame.
