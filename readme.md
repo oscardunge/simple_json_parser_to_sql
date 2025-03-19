@@ -1,5 +1,4 @@
 
-
 # Simple JSON Parser to SQL
 
 ## Overview
