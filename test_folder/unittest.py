@@ -1,3 +1,5 @@
+#unit test of components
+
 try:
     import json
     from json_parser_simple import *

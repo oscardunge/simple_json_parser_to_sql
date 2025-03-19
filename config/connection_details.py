@@ -1,3 +1,4 @@
+#mock-connection-details
 conn_details = {
     "dbname":'postgres',
     "user":'oscar',
